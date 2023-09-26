@@ -1,0 +1,33 @@
+
+
+
+#header {
+    border-radius: 8px;
+}
+
+table td:nth-child(2),
+table th:nth-child(2) {
+    width: 50%;
+}
+
+.col {
+    margin-top: 10px;
+}
+
+#tables {
+    margin-top: 10px;
+}
+
+#col1 {
+    overflow-y: scroll;
+}
+
+tr {
+    max-height: 5px;
+}
+
+input {
+    border: solid 1px;
+    border-radius: 2px;
+    border-color: grey;
+}

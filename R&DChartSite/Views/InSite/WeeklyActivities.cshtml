@@ -1,0 +1,67 @@
+﻿
+@using RDChartSite.BussinessLayer
+@using R_DChartSite.Entities
+@using RDChartSite.Entities
+@using R_DChartSite.Entities.ValueObjects
+
+
+
+@{
+    ViewBag.Title = "Haftalık Aktiviteler";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    UserManager userManager = new UserManager();
+    Users user = new Users();
+    if (Session["Login"] != null)
+    {
+        user = Session["Login"] as Users;
+    }
+    ActivitiesManager activitiesManager = new ActivitiesManager();
+    List<DailyActivityData> activities = new List<DailyActivityData>();
+    activities = activitiesManager.GetDailyActivitiesInWeek();
+}
+
+
+@foreach (var userGroup in activities.GroupBy(a => a.User))
+{
+    user = userGroup.Key;
+    List<DailyActivityData> userActivities = userGroup.ToList();
+
+    foreach (var dailyActivity in userActivities.GroupBy(a => a.DailyActivity))
+    {
+        var date = dailyActivity.Key.Date;
+        List<HourlyActivity> hourlyActivities = dailyActivity.Select(a => a.HourlyActivity).ToList();
+
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                @user.Name @user.Surname - @date.ToShortDateString()
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-sm">
+                    <thead class="" style="font-size:13px;">
+                        <tr>
+                            <th>SAAT</th>
+                            <th>AÇIKLAMA</th>
+                            <th>PROJE KODU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var activity in hourlyActivities)
+                        {
+                            var time = activity.Time.ToString(@"hh\:mm");
+                            <tr>
+                                <td>@time</td>
+                                <td>@activity.Description</td>
+                                <td>@activity.ProjectCode</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+
+
+
+

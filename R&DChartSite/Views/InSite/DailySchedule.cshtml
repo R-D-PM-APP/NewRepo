@@ -1,0 +1,23 @@
+﻿@model R_DChartSite.Entities.ValueObjects.DailyScheduleViewModel
+@{
+    
+    ViewBag.Title = "Günlük Aktivite Formu";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container"style="width:100%;height:100%;" id="tables">
+
+    @using (Html.BeginForm("DailySchedule", "InSite", FormMethod.Post, new { onsubmit = "return validateForm()" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_DailyTable")
+
+        <div class="container m-lg-auto">
+            <div class="text-end">
+                <button class="btn btn-success " style="width:80px">Ekle</button>
+                <input type="reset" class="btn btn-danger"/>
+            </div>
+        </div>
+    }
+</div>
+

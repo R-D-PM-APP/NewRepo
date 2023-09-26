@@ -1,0 +1,34 @@
+﻿@model RDChartSite.Entities.Projects
+
+@{
+    ViewBag.Title = "Proje Bilgileri";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2>Proje Bilgileri</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Proje İsmi</h4>
+                <p>@Html.DisplayFor(model => model.ProjectName)</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Proje Kodu</h4>
+                <p>@Html.DisplayFor(model => model.ProjectCode)</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <p>
+                    @Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Listeye Geri Dön", "Index", new { }, new { @class = "btn btn-secondary" })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
